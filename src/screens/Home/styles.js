@@ -50,6 +50,8 @@ export const TopInfoContainer = styled.View`
 
 export const IconStatus = styled.Image`
     margin: 32px;
+    width: 225px;
+    height: 225px;
 `;
 
 export const TextBottom = styled.Text`
