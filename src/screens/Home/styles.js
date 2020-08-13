@@ -64,18 +64,29 @@ export const IconStatus = styled.Image`
     width: 200px;
     height: 200px;
 `;
-export const TextBottomContainer = styled.Text`
+export const TextBottomContainer = styled.View`
     margin-top: 32px;
     align-items: center;
     justify-content: center;
-    max-width: 500px;
-    align-self: center;
 `;
 export const TextBottom = styled.Text`
+    align-items: center;
+    justify-content: center;
     text-align: center;
     font-size: 24px;
     line-height: 28px;
     color: #ffffff;
     margin-bottom: 8px;
+    align-self: center;
+    font-family: Roboto_400Regular;
+`;
+export const TextBottomnumber = styled.Text`
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    line-height: 28px;
+    color: #ffffff;
+    margin-bottom: 8px;
+    align-self: center;
     font-family: Roboto_500Medium;
 `;

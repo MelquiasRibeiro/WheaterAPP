@@ -1,4 +1,3 @@
-/* eslint-disable default-case */
 import React, { useEffect, useState } from 'react';
 import * as Location from 'expo-location';
 import { parseISO, getHours } from 'date-fns';
@@ -17,6 +16,7 @@ import {
     TopBarContainer,
     MainContainer,
     TextBottomContainer,
+    TextBottomnumber,
 } from './styles';
 import api from '../../services/api';
 import { apiKey } from '../../utils/apiKey';
@@ -168,12 +168,9 @@ export default function Home() {
                         </LocalText>
                         <TextBottomContainer>
                             <TextBottom>Máxima/Mínima</TextBottom>
-                            {'\n'}
-                            {'\n'}
-                            <TextBottom>
-                                {'      '}
+                            <TextBottomnumber>
                                 {max}º | {min}º
-                            </TextBottom>
+                            </TextBottomnumber>
                         </TextBottomContainer>
                     </MainContainer>
                 </>
