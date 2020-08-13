@@ -2,46 +2,57 @@ import styled from 'styled-components/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-export const Container = styled.View`
+export const Container = styled(LinearGradient)`
     flex: 1;
     align-items: center;
 `;
-export const TopBarContainer = styled.View`
-    flex-direction: row;
+
+export const LoadingContainer = styled.View`
+    flex: 1;
     align-items: center;
     justify-content: center;
+`;
+export const TopBarContainer = styled.View`
+    align-items: flex-end;
+    justify-content: flex-end;
     margin-top: 64px;
+    flex-direction: row;
+    width: 300px;
+`;
+export const MainContainer = styled.View`
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
 `;
 export const LocalText = styled.Text`
-    margin: 0 55px;
     align-self: center;
-    font-weight: bold;
+    font-family: Roboto_700Bold;
     font-size: 24px;
     line-height: 28px;
-    color: #00005c;
+    color: #ffffff;
+    margin-bottom: 40px;
 `;
 
 export const ReloadButton = styled.TouchableOpacity``;
 
 export const ReloadIcon = styled(MaterialCommunityIcons)``;
 
-export const InfoContainer = styled(LinearGradient)`
+export const InfoContainer = styled.View`
     align-items: center;
-    height: 500px;
-    width: 300px;
-    margin: 24px;
-    border-radius: 16px;
+    margin: 32px;
 `;
 
 export const TextInfo = styled.Text`
     font-size: 16px;
-    color: #f0f5f7;
+    color: #ffffff;
+    font-family: Roboto_400Regular;
 `;
 
 export const TempInfo = styled.Text`
     font-size: 60px;
     line-height: 70px;
-    color: #f0f5f7;
+    color: #ffffff;
+    font-family: Roboto_400Regular;
 `;
 export const TopInfoContainer = styled.View`
     margin-top: 16px;
@@ -49,16 +60,22 @@ export const TopInfoContainer = styled.View`
 `;
 
 export const IconStatus = styled.Image`
-    margin: 32px;
-    width: 225px;
-    height: 225px;
+    margin: 16px;
+    width: 200px;
+    height: 200px;
 `;
-
+export const TextBottomContainer = styled.Text`
+    margin-top: 32px;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
+    align-self: center;
+`;
 export const TextBottom = styled.Text`
+    text-align: center;
     font-size: 24px;
     line-height: 28px;
-    color: #f0f5f7;
+    color: #ffffff;
     margin-bottom: 8px;
+    font-family: Roboto_500Medium;
 `;
-
-export const BottomButtonsContainer = styled.View``;

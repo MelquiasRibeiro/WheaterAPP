@@ -1,29 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import * as Location from 'expo-location';
-import { Alert } from 'react-native';
+import { parseISO, getDay, getHours } from 'date-fns';
+import pt from 'date-fns/locale/pt-BR';
+import { Alert, ActivityIndicator } from 'react-native';
 import {
     Container,
+    LoadingContainer,
     LocalText,
     ReloadButton,
     ReloadIcon,
-    InfoContainer,
     TextInfo,
     TempInfo,
     TopInfoContainer,
     TextBottom,
-    BottomButtonsContainer,
     IconStatus,
     TopBarContainer,
+    MainContainer,
+    TextBottomContainer,
 } from './styles';
-import Icon from '../../IconStatus.png';
 import api from '../../services/api';
 import { apiKey } from '../../utils/apiKey';
 
 export default function Home() {
     const [initialPosition, setInitialPosition] = useState([0, 0]);
-    const [wheaterInfo, setWheaterInfo] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [isNigth, setIsNigth] = useState(false);
+    const [city, setCity] = useState('');
+    const [country, setCountry] = useState('');
+    const [temp, setTemp] = useState('');
+    const [description, setDescription] = useState('');
+    const [icon, setIcon] = useState('');
+    const [max, setMax] = useState('');
+    const [min, setMin] = useState('');
+    const [message, setMessage] = useState('Bom Dia');
 
-    useEffect(() => {
+    function getData() {
+        setLoading(!loading);
         api.get('/weather', {
             params: {
                 lat: initialPosition[0],
@@ -32,56 +44,102 @@ export default function Home() {
                 lang: 'pt_br',
                 units: 'metric',
             },
-        }).then((response) => {
-            setWheaterInfo(response.data);
-        });
-        console.log(wheaterInfo.weather[0].icon);
+        })
+            .then((response) => {
+                setCity(response.data.name);
+                setCountry(response.data.sys.country);
+                setTemp(response.data.main.temp);
+                setDescription(response.data.weather[0].description);
+                setIcon(response.data.weather[0].icon);
+                setMax(response.data.main.temp_max);
+                setMin(response.data.main.temp_min);
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setLoading(false);
+            });
+    }
+
+    function goToNigth() {
+        if (
+            getHours(new Date()) <
+            getHours(parseISO('2020-08-13T21:01:07.798Z'))
+        ) {
+            setIsNigth(false);
+        } else {
+            setIsNigth(true);
+        }
+    }
+
+    async function loadPosition() {
+        const { status } = await Location.requestPermissionsAsync();
+        if (status !== 'granted') {
+            Alert.alert(
+                'Ooops...',
+                'Precisamos da sua localização para continuar'
+            );
+        }
+
+        const location = await Location.getCurrentPositionAsync();
+        const { latitude, longitude } = location.coords;
+        setInitialPosition([latitude, longitude]);
+    }
+
+    useEffect(() => {
+        loadPosition();
+        goToNigth();
     }, []);
 
     useEffect(() => {
-        async function loadPosition() {
-            const { status } = await Location.requestPermissionsAsync();
-            if (status !== 'granted') {
-                Alert.alert('Ooops...', 'Precisamos da sua localização');
-            }
-
-            const location = await Location.getCurrentPositionAsync();
-            const { latitude, longitude } = location.coords;
-            setInitialPosition([latitude, longitude]);
-        }
-        loadPosition();
-    }, []);
+        getData();
+    }, [initialPosition]);
 
     return (
-        <Container>
-            <TopBarContainer>
-                <LocalText>
-                    {wheaterInfo.name}-{wheaterInfo.sys.country}
-                </LocalText>
-                <ReloadButton>
-                    <ReloadIcon name="reload" size={24} color="#00005c" />
-                </ReloadButton>
-            </TopBarContainer>
-            <InfoContainer colors={['#404EE8', '#56BFFD']}>
-                <TopInfoContainer>
-                    <TextInfo>Boa Noite</TextInfo>
-                    <TempInfo> {wheaterInfo.main.temp}º</TempInfo>
-                    <TextInfo>
-                        {' '}
-                        Domingo, {wheaterInfo.weather[0].description}{' '}
-                    </TextInfo>
-                </TopInfoContainer>
-                <IconStatus
-                    source={{
-                        uri: `http://openweathermap.org/img/wn/${wheaterInfo.weather[0].icon}@4x.png`,
-                    }}
-                />
-                <TextBottom>Máx/Mín</TextBottom>
-                <TextBottom>
-                    {wheaterInfo.main.temp_max}º|{wheaterInfo.main.temp_min}º
-                </TextBottom>
-            </InfoContainer>
-            <BottomButtonsContainer />
+        <Container
+            colors={isNigth ? ['#475059', '#000000'] : ['#EC6E4C', '#F53F0D']}
+        >
+            {loading ? (
+                <LoadingContainer>
+                    <ActivityIndicator color="#ffff" size={120} />
+                </LoadingContainer>
+            ) : (
+                <>
+                    <TopBarContainer>
+                        <ReloadButton onPress={loadPosition}>
+                            <ReloadIcon
+                                name="reload"
+                                size={24}
+                                color="#FFFFFF"
+                            />
+                        </ReloadButton>
+                    </TopBarContainer>
+                    <MainContainer>
+                        <TopInfoContainer>
+                            <TextInfo>{message}</TextInfo>
+                            <TempInfo> {temp}º</TempInfo>
+                            <TextInfo> Domingo, {description}</TextInfo>
+                        </TopInfoContainer>
+                        <IconStatus
+                            source={{
+                                uri: `http://openweathermap.org/img/wn/${icon}@4x.png`,
+                            }}
+                        />
+                        <LocalText>
+                            {city}-{country}
+                        </LocalText>
+                        <TextBottomContainer>
+                            <TextBottom>Máxima/Mínima</TextBottom>
+                            {'\n'}
+                            {'\n'}
+                            <TextBottom>
+                                {'      '}
+                                {max}º | {min}º
+                            </TextBottom>
+                        </TextBottomContainer>
+                    </MainContainer>
+                </>
+            )}
         </Container>
     );
 }

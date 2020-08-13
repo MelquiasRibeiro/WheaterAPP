@@ -1,12 +1,27 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import Home from "./src/screens/Home/index";
+import { StatusBar } from 'expo-status-bar';
+import { AppLoading } from 'expo';
+import React from 'react';
+import {
+    Roboto_400Regular,
+    Roboto_500Medium,
+    Roboto_700Bold,
+    useFonts,
+} from '@expo-google-fonts/roboto';
+import Home from './src/screens/Home/index';
 
 export default function App() {
+    const [fontsLoaded] = useFonts({
+        Roboto_400Regular,
+        Roboto_500Medium,
+        Roboto_700Bold,
+    });
+    if (!fontsLoaded) {
+        return <AppLoading />;
+    }
     return (
         <>
             <StatusBar
-                barStyle="dark-content"
+                barStyle="light-content"
                 backgroundColor="transparent"
                 translucent
             />
