@@ -35,28 +35,31 @@ export default function Home() {
     const [message, setMessage] = useState('Bom Dia');
     const [day, setDay] = useState('');
 
-    switch (new Date().getDay()) {
-        case 0:
-            setDay('Domingo');
-            break;
-        case 1:
-            setDay('Segunda');
-            break;
-        case 2:
-            setDay('Terça');
-            break;
-        case 3:
-            setDay('Quarta');
-            break;
-        case 4:
-            setDay('Quinta');
-            break;
-        case 5:
-            setDay('Sexta');
-            break;
-        case 6:
-            setDay('Sabado');
+    function getDay() {
+        switch (new Date().getDay()) {
+            case 0:
+                setDay('Domingo');
+                break;
+            case 1:
+                setDay('Segunda');
+                break;
+            case 2:
+                setDay('Terça');
+                break;
+            case 3:
+                setDay('Quarta');
+                break;
+            case 4:
+                setDay('Quinta');
+                break;
+            case 5:
+                setDay('Sexta');
+                break;
+            case 6:
+                setDay('Sabado');
+        }
     }
+
     function getData() {
         setLoading(!loading);
         api.get('/weather', {
@@ -120,6 +123,7 @@ export default function Home() {
     useEffect(() => {
         loadPosition();
         goToNigth();
+        getDay();
     }, []);
 
     useEffect(() => {
