@@ -1,7 +1,7 @@
+/* eslint-disable default-case */
 import React, { useEffect, useState } from 'react';
 import * as Location from 'expo-location';
-import { parseISO, getDay, getHours } from 'date-fns';
-import pt from 'date-fns/locale/pt-BR';
+import { parseISO, getHours } from 'date-fns';
 import { Alert, ActivityIndicator } from 'react-native';
 import {
     Container,
@@ -33,7 +33,30 @@ export default function Home() {
     const [max, setMax] = useState('');
     const [min, setMin] = useState('');
     const [message, setMessage] = useState('Bom Dia');
+    const [day, setDay] = useState('');
 
+    switch (new Date().getDay()) {
+        case 0:
+            setDay('Domingo');
+            break;
+        case 1:
+            setDay('Segunda');
+            break;
+        case 2:
+            setDay('Terça');
+            break;
+        case 3:
+            setDay('Quarta');
+            break;
+        case 4:
+            setDay('Quinta');
+            break;
+        case 5:
+            setDay('Sexta');
+            break;
+        case 6:
+            setDay('Sabado');
+    }
     function getData() {
         setLoading(!loading);
         api.get('/weather', {
@@ -64,11 +87,19 @@ export default function Home() {
     function goToNigth() {
         if (
             getHours(new Date()) <
+            getHours(parseISO('2020-08-13T14:01:07.798Z'))
+        ) {
+            setMessage('Bom Dia');
+            setIsNigth(false);
+        } else if (
+            getHours(new Date()) <
             getHours(parseISO('2020-08-13T21:01:07.798Z'))
         ) {
             setIsNigth(false);
+            setMessage('Boa Tarde');
         } else {
             setIsNigth(true);
+            setMessage('Boa Noite');
         }
     }
 
@@ -118,7 +149,10 @@ export default function Home() {
                         <TopInfoContainer>
                             <TextInfo>{message}</TextInfo>
                             <TempInfo> {temp}º</TempInfo>
-                            <TextInfo> Domingo, {description}</TextInfo>
+                            <TextInfo>
+                                {' '}
+                                {day}, {description}
+                            </TextInfo>
                         </TopInfoContainer>
                         <IconStatus
                             source={{
