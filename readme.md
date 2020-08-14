@@ -82,7 +82,7 @@ falando um pouco sobre o padrão de código, foi utilizado um o <a href="https:/
 
 
 ## Protótipo:
-
-<button><a>Ver Protótipo</a></button>
-
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FL6POowdrInhvCfABqqIk1k%2FwhaterAPP%3Fnode-id%3D0%253A1&chrome=DOCUMENTATION" allowfullscreen></iframe>
+<div style="display:flex; flex-direction:column; align-items:center">
+<a href="https://www.figma.com/file/L6POowdrInhvCfABqqIk1k/whaterAPP?node-id=0%3A1"><button style="align-self:center; border-radius:8px; heigth:50px; background-color:#F53F0D;font-weight: bold; color: #fafafa;  text-decoration: none; border:none; margin-bottom:20px">ver Protótipo</button></a>
+<image src="https://user-images.githubusercontent.com/54459438/90279041-d15b9480-de3e-11ea-9db1-c83e78321699.png" style="align-self:center;"/> 
+</div>
