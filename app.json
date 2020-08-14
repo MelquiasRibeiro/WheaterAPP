@@ -9,18 +9,21 @@
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#F53F0D",
-    "updates": {
-      "fallbackToCacheTimeout": 0
+      "updates": {
+        "fallbackToCacheTimeout": 0
+      },
+      "assetBundlePatterns": [
+        "**/*"
+      ],
+      "ios": {
+        "supportsTablet": true
+      },
+      "web": {
+        "favicon": "./assets/favicon.png"
+      }
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "android": {
+      "package": "com.melquias.wheaterApp"
     }
   }
-}
 }
