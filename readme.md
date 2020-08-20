@@ -11,7 +11,7 @@
 3. [Documentação](#docs)  
 4. [Telas](#screes)  
 5. [Protótipo](#prototype)  
-
+6. [Baixar APK](#apk)
 
 
 <div id="howToRun">
@@ -80,9 +80,20 @@ falando um pouco sobre o padrão de código, foi utilizado um o <a href="https:/
 </div>
 <image src="https://user-images.githubusercontent.com/54459438/90277007-32816900-de3b-11ea-8c70-e23cdf0c8639.png" style="align-self:center;"/> 
 
+<div id="prototype">
 
 ## Protótipo:
+
+</div>
 <div style="display:flex; flex-direction:column; align-items:center">
 <a href="https://www.figma.com/file/L6POowdrInhvCfABqqIk1k/whaterAPP?node-id=0%3A1"><button style="align-self:center; border-radius:8px; heigth:50px; background-color:#F53F0D;font-weight: bold; color: #fafafa;  text-decoration: none; border:none; margin-bottom:20px">ver Protótipo</button></a>
 <image src="https://user-images.githubusercontent.com/54459438/90279041-d15b9480-de3e-11ea-9db1-c83e78321699.png" style="align-self:center;"/> 
+</div>
+
+<div id="apk">
+
+## APK
+
+[Baixar APK](https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40melquias/wheaterApp-6acda85106ed44569f2a8fe5537dc726-signed.apk)
+
 </div>
